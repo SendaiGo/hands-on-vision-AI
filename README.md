@@ -1,6 +1,7 @@
-# hands-on-vision-AI
+## hands-on-vision-AI
 
-## 最終目標:Vertex AI で　画像の仕分けをする
+## 最終目標:Vertex AI で遊ぶ
+
 
 ## step1 detectImageProperties
 - 画像の色を調べる
@@ -34,11 +35,29 @@
 
 
 ### 事前準備
-- GCPのプロジェクトを作成する
-- GCPのプロジェクトにCloud Storageを作成する
-- GCPのプロジェクトにCloud Vision APIを有効にする
-- GCPのプロジェクトにCloud Vision APIのサービスアカウントを作成する
-- GCPのプロジェクトにCloud Vision APIのサービスアカウントのキーを作成する
-- GCPのプロジェクトにCloud Vision APIのサービスアカウントのキーをダウンロードする
-- GCPのプロジェクトにCloud Vision APIのサービスアカウントのキーを環境変数に設定する
 
+### Goをインストールする
+- https://golang.org/doc/install
+- https://golang.org/doc/install?download=go1.20.1.linux-amd64.tar.gz
+
+### Gitをインストールする
+- https://git-scm.com/downloads
+
+### Githubからソースコードをダウンロードする
+
+```
+git clone https://github.com/SendaiGo/hands-on-vision-AI
+```
+
+### 必要なライブラリをインストールする
+
+```
+cd hands-on-vision-AI
+go mod tidy
+```
+
+### サンプルコードを実行する
+
+```
+go run xxx/main.go xxx.jpg
+```
