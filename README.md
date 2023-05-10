@@ -4,7 +4,6 @@
 
 ### Goをインストールする
 - https://golang.org/doc/install
-- https://golang.org/doc/install?download=go1.20.1.linux-amd64.tar.gz
 
 ### Gitをインストールする
 - https://git-scm.com/downloads
@@ -61,7 +60,7 @@ go run xxx/main.go xxx.jpg
 
 
 ### Vertix AI の モデルを作成する
-
+時間があったら
 
 ```
 Vertaによるモデル管理
