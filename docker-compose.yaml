@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   api:
-    image: golang:1.20.1:alpine3.13
+    image: golang:1.20.3-alpine3.17
     container_name: api
     restart: always
     ports:
@@ -10,4 +10,4 @@ services:
     volumes:
       - ./:/go/api
     working_dir: /go/api
-    command: go run main.go
+    # command: go run main.go

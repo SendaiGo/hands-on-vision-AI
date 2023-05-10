@@ -38,22 +38,17 @@ func main() {
 		log.Fatalf("Failed to create image: %v", err)
 	}
 
-	// Detects faces in the image
-	faces, err := client.DetectFaces(ctx, image, nil, 10)
+	// Detect Safe Search
+	fmt.Println("Detect Safe Search")
+	safeSearch, err := client.DetectSafeSearch(ctx, image, nil)
 	if err != nil {
-		log.Fatalf("Failed to detect faces: %v", err)
+		log.Fatalf("Failed to detect safe search: %v", err)
 	}
-
-	if len(faces) == 0 {
-		fmt.Println("No faces found.")
-		return
-	} else {
-		fmt.Printf("%d人が見つかりました in %s:\n", len(faces), fileName)
-		for _, face := range faces {
-			fmt.Println(face.JoyLikelihood)
-			// fmt.Println(face.SorrowLikelihood)
-			// fmt.Println(face.AngerLikelihood)
-			// fmt.Println(face)
-		}
-	}
+	// fmt.Println(safeSearch)
+	fmt.Println("Safe Search properties:")
+	fmt.Println("Adult:", safeSearch.Adult)
+	fmt.Println("Medical:", safeSearch.Medical)
+	fmt.Println("Racy:", safeSearch.Racy)
+	fmt.Println("Spoofed:", safeSearch.Spoof)
+	fmt.Println("Violence:", safeSearch.Violence)
 }
