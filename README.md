@@ -1,7 +1,33 @@
-## hands-on-vision-AI
+## vertixAIハンズオン with Go
 
-## 最終目標:Vertex AI で遊ぶ
+### 事前準備
 
+### Goをインストールする
+- https://golang.org/doc/install
+- https://golang.org/doc/install?download=go1.20.1.linux-amd64.tar.gz
+
+### Gitをインストールする
+- https://git-scm.com/downloads
+
+### Githubからソースコードをダウンロードする
+
+```
+git clone https://github.com/SendaiGo/hands-on-vision-AI
+```
+
+### 必要なライブラリをインストールする
+
+```
+cd hands-on-vision-AI
+go mod tidy
+```
+
+### サンプルコードを実行する
+
+```
+go run xxx/main.go xxx.jpg
+```
+## サンプルコードの説明
 
 ## step1 detectImageProperties
 - 画像の色を調べる
@@ -34,30 +60,21 @@
 - 画像の中のWeb上の物体を調べる
 
 
-### 事前準備
+### Vertix AI の モデルを作成する
 
-### Goをインストールする
-- https://golang.org/doc/install
-- https://golang.org/doc/install?download=go1.20.1.linux-amd64.tar.gz
-
-### Gitをインストールする
-- https://git-scm.com/downloads
-
-### Githubからソースコードをダウンロードする
 
 ```
-git clone https://github.com/SendaiGo/hands-on-vision-AI
-```
-
-### 必要なライブラリをインストールする
-
-```
-cd hands-on-vision-AI
-go mod tidy
-```
-
-### サンプルコードを実行する
-
-```
-go run xxx/main.go xxx.jpg
+Vertaによるモデル管理
+クライアントライブラリのインストール: go get github.com/VertaAI/verta-go
+プロジェクト・データセット・モデルの作成: client.CreateProject(), client.CreateDataset(), client.CreateModel()
+ノートブックの実行と結果の保存
+Jupyterノートブック上から、vertaパッケージをインストール
+ノートブックから、Run()メソッドを呼び出して処理を実行： runID, err := client.CreateRun(ctx, &CreateRunRequest{ExperimentID: experiment.ID})
+モデルのトレーニングと評価
+データセットの取得: dataset, err := client.FindDatasetByName(datasetName)
+モデルにデータセットを割り当て: model.LogDataset(dataset)
+モデルのトレーニングと評価: model.Fit(data)、model.Evaluate(testData)
+モデルのデプロイ
+モデルの保存: model.Save()
+モデルのデプロイ: endpt, err := model.Deploy()
 ```
