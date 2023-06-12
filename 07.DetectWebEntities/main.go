@@ -37,17 +37,13 @@ func main() {
 		log.Fatalf("Failed to create image: %v", err)
 	}
 
-	// Detects faces in the image
-	faces, err := client.DetectFaces(ctx, image, nil, 10)
+	// Web entities
+	web, err := client.DetectWeb(ctx, image, nil)
 	if err != nil {
-		log.Fatalf("Failed to detect faces: %v", err)
+		log.Fatalf("Failed to detect web: %v", err)
 	}
 
-	if len(faces) == 0 {
-		fmt.Println("No faces found.")
-		return
-	} else {
-		fmt.Printf("%d人が見つかりました in %s:\n", len(faces), fileName)
-		fmt.Println(faces)
+	for _, w := range web.PagesWithMatchingImages {
+		fmt.Println(w)
 	}
 }

@@ -38,7 +38,6 @@ func main() {
 	}
 
 	// Detects Text in the image file
-	fmt.Println("Detect Text")
 	texts, err := client.DetectTexts(ctx, image, nil, 10)
 	if err != nil {
 		log.Fatalf("Failed to detect texts: %v", err)

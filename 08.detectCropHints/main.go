@@ -7,6 +7,7 @@ import (
 	"os"
 
 	vision "cloud.google.com/go/vision/apiv1"
+	"github.com/fogleman/gg"
 	"google.golang.org/api/option"
 )
 
@@ -37,17 +38,32 @@ func main() {
 		log.Fatalf("Failed to create image: %v", err)
 	}
 
-	// Detects faces in the image
-	faces, err := client.DetectFaces(ctx, image, nil, 10)
+	// clop hints
+	fmt.Println("Crop Hints")
+	crop, err := client.CropHints(ctx, image, nil)
 	if err != nil {
-		log.Fatalf("Failed to detect faces: %v", err)
+		log.Fatalf("Failed to detect crop hints: %v", err)
 	}
 
-	if len(faces) == 0 {
-		fmt.Println("No faces found.")
-		return
-	} else {
-		fmt.Printf("%d人が見つかりました in %s:\n", len(faces), fileName)
-		fmt.Println(faces)
+	// 画像の読み込み
+	img, _ := gg.LoadImage(fileName)
+	dc := gg.NewContextForImage(img)
+
+	fmt.Println(crop)
+	for _, hint := range crop.CropHints {
+		for _, vertex := range hint.BoundingPoly.Vertices {
+			x := float64(vertex.X)
+			y := float64(vertex.Y)
+			w := float64(vertex.X - vertex.X)
+			h := float64(vertex.Y - vertex.Y)
+
+			// 顔の位置に四角を描画
+			dc.DrawRectangle(x, y, w, h)
+			dc.SetRGB(1, 0, 0)
+			dc.SetLineWidth(2)
+			dc.Stroke()
+		}
 	}
+
+	dc.SavePNG("images/" + photo + "_crop.png")
 }
