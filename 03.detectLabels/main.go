@@ -16,14 +16,13 @@ func main() {
 	// Vision API client is created with the default application credentials.
 	// See https://cloud.google.com/docs/authentication/production
 	ctx := context.Background()
-	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("sendaigo2306-e0f923b400fa.json"))
+	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("key.json"))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 	defer client.Close()
 
 	// The name of the image file to annotate
-	// fileName := "images/pic01-7.jpg"
 	fileName := "images/" + photo
 
 	// Reads the image file into memory
@@ -39,12 +38,12 @@ func main() {
 	}
 
 	// Detects labels in the image file
-	fmt.Println("Detect Labels")
 	labels, err := client.DetectLabels(ctx, image, nil, 10)
 	if err != nil {
 		log.Fatalf("Failed to detect labels: %v", err)
 	}
 
-	fmt.Printf("Found %d labels in %s:\n", len(labels), fileName)
-
+	for _, label := range labels {
+		fmt.Println(label.Description, label.Score)
+	}
 }

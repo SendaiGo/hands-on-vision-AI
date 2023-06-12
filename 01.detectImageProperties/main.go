@@ -16,14 +16,13 @@ func main() {
 	// Vision API client is created with the default application credentials.
 	// See https://cloud.google.com/docs/authentication/production
 	ctx := context.Background()
-	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("sendaigo2306-e0f923b400fa.json"))
+	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("key.json"))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 	defer client.Close()
 
 	// The name of the image file to annotate
-	// fileName := "images/pic01-7.jpg"
 	fileName := "images/" + photo
 
 	// Reads the image file into memory
@@ -39,11 +38,9 @@ func main() {
 	}
 
 	// Detects image properties in the image file
-	fmt.Println("Detect Image Properties")
 	prep, err := client.DetectImageProperties(ctx, image, nil)
 	if err != nil {
 		log.Fatalf("Failed to detect image properties: %v", err)
 	}
 	fmt.Println(prep)
-
 }

@@ -37,17 +37,13 @@ func main() {
 		log.Fatalf("Failed to create image: %v", err)
 	}
 
-	// Detects faces in the image
-	faces, err := client.DetectFaces(ctx, image, nil, 10)
+	// Landmark
+	fmt.Println("Landmark")
+	landmark, err := client.DetectLandmarks(ctx, image, nil, 10)
 	if err != nil {
-		log.Fatalf("Failed to detect faces: %v", err)
+		log.Fatalf("Failed to detect landmark: %v", err)
 	}
 
-	if len(faces) == 0 {
-		fmt.Println("No faces found.")
-		return
-	} else {
-		fmt.Printf("%d人が見つかりました in %s:\n", len(faces), fileName)
-		fmt.Println(faces)
-	}
+	fmt.Println(landmark)
+
 }

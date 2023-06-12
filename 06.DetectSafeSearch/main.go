@@ -16,7 +16,7 @@ func main() {
 	// Vision API client is created with the default application credentials.
 	// See https://cloud.google.com/docs/authentication/production
 	ctx := context.Background()
-	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("sendaigo2306-e0f923b400fa.json"))
+	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("key.json"))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}

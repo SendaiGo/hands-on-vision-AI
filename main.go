@@ -18,7 +18,7 @@ func main() {
 	// Vision API client is created with the default application credentials.
 	// See https://cloud.google.com/docs/authentication/production
 	ctx := context.Background()
-	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("healthy-garage-383507-b65e6912ff13.json"))
+	client, err := vision.NewImageAnnotatorClient(ctx, option.WithCredentialsFile("key.json"))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
@@ -104,6 +104,51 @@ func main() {
 	}
 
 	fmt.Println(product)
+
+	// Web entities
+	fmt.Println("Web Entities")
+	web, err := client.DetectWeb(ctx, image, nil)
+	if err != nil {
+		log.Fatalf("Failed to detect web: %v", err)
+	}
+
+	fmt.Println(web)
+
+	// clop hints
+	fmt.Println("Crop Hints")
+	crop, err := client.CropHints(ctx, image, nil)
+	if err != nil {
+		log.Fatalf("Failed to detect crop hints: %v", err)
+	}
+
+	fmt.Println(crop)
+
+	// Safe Search
+	fmt.Println("Safe Search")
+	safe, err := client.DetectSafeSearch(ctx, image, nil)
+	if err != nil {
+		log.Fatalf("Failed to detect safe search: %v", err)
+	}
+
+	fmt.Println(safe)
+
+	// Landmark
+	fmt.Println("Landmark")
+	land, err := client.DetectLandmarks(ctx, image, nil, 10)
+	if err != nil {
+		log.Fatalf("Failed to detect landmarks: %v", err)
+	}
+
+	fmt.Println(land)
+
+	// Logo
+	fmt.Println("Logo")
+	logo, err := client.DetectLogos(ctx, image, nil, 10)
+	if err != nil {
+		log.Fatalf("Failed to detect logos: %v", err)
+	}
+
+	fmt.Println(logo)
 }
 
 func createProduct(ctx context.Context, client *vision.ProductSearchClient, projectID, location, productID, productDisplayName string) error {
