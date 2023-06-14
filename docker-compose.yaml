@@ -4,7 +4,7 @@ services:
   api:
     image: golang:1.20.3-alpine3.17
     container_name: api
-    restart: always
+    tty: true
     ports:
       - "8086:8080"
     volumes:
